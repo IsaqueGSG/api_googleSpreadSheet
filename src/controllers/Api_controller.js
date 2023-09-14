@@ -14,7 +14,7 @@ exports.add = async (req, res)=>{
         auth: client
     })
 
-    spreadsheetId = "1q6uH00wREt22NxNnWysoyIaSdyWG6NBGYcY08CbRDBI";
+    spreadsheetId = ""; //add your spreadsheet Id
 
     const row = await googleSheets.spreadsheets.values.append({
         auth,
