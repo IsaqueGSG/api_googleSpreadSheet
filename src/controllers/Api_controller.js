@@ -14,7 +14,21 @@ exports.add = async (req, res)=>{
         auth: client
     })
 
-    spreadsheetId = ""; //add your spreadsheet Id
+    spreadsheetId = "1q6uH00wREt22NxNnWysoyIaSdyWG6NBGYcY08CbRDBI";
+    const {
+        Nserie,
+        patrimonio,
+        local,
+        inventariante,
+        obs,
+        statusBem,
+        tipoBem
+    } = req.body;
+
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    const dataAtual = today.toLocaleDateString(); 
+    const horaAtual = today.toLocaleTimeString(); 
 
     const row = await googleSheets.spreadsheets.values.append({
         auth,
@@ -22,7 +36,18 @@ exports.add = async (req, res)=>{
         range: "Página1",
         valueInputOption: "USER_ENTERED",
         resource: {
-            values: [[ req.body.code ]]
+            values: [
+                [   
+                    dataAtual.concat(' ' + horaAtual ),
+                    patrimonio, 
+                    Nserie, 
+                    inventariante, 
+                    local, 
+                    obs, 
+                    statusBem, 
+                    tipoBem  
+                ]
+            ]
         }        
     })
     console.log(row)
